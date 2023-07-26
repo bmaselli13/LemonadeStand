@@ -1,2 +1,1 @@
-# LemonadeStand
-C# project to simulate a lemonade stand
+# LemonadeStand_FSF_CSharp_Starter
