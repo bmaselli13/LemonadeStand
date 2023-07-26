@@ -3,9 +3,20 @@ namespace LemonadeStand
 {
 	public class Customer
 	{
-		public Customer()
+        //Member Variables (HAS A)
+
+
+        //Constructor
+        public Customer()
 		{
-		}
-	}
+            
+
+            
+
+            
+        }
+
+        //Methods CAN DO
+    }
 }
 

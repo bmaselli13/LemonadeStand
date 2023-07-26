@@ -9,25 +9,25 @@ namespace LemonadeStand
     internal class Recipe
     {
         // member variables (HAS A)
-        public int numberOfLemons;
-        public int numberOfSugarCubes;
-        public int numberOfIceCubes;
-        public double price;
+        public int amountOfLemons;
+        public int amountOfSugarCubes;
+        public int amountOfIceCubes;
+        public double pricePerCup;
 
 
         // constructor (SPAWNER)
         public Recipe()
         {
-            numberOfLemons = 2;
-            numberOfSugarCubes = 4;
-            numberOfIceCubes = 10;
-            price = 1;
+            amountOfLemons = 2;
+            amountOfSugarCubes = 4;
+            amountOfIceCubes = 10;
+            pricePerCup = 1;
         }
 
         //Member Methods (CAN DO)
         public void DisplayRecipe()
         {
-            Console.WriteLine($"Your recipe currently consists of:\n{numberOfLemons} lemons per pitcher\n{numberOfSugarCubes} sugar cubes per pitcher\n{numberOfIceCubes} ice cubes per pitcher");
+            Console.WriteLine($"Your recipe currently consists of:\n{amountOfLemons} lemons per pitcher\n{amountOfSugarCubes} sugar cubes per pitcher\n{amountOfIceCubes} ice cubes per pitcher");
         }
 
     }

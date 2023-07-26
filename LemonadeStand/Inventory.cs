@@ -10,9 +10,9 @@ namespace LemonadeStand
     {
         // member variables (HAS A)
         public List<Lemon> lemons;
-        public List<SugarCube> sugarCubes;
-        public List<IceCube> iceCubes;
+        public List<IceCube> iceCubes;                
         public List<Cup> cups;
+        public List<SugarCube> sugarCubes;
 
         // constructor (SPAWNER)
         public Inventory()

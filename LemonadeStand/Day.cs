@@ -3,9 +3,18 @@ namespace LemonadeStand
 {
 	public class Day
 	{
-		public Day()
+        //Member Variables (HAS A)
+        public Weather weather;
+        public List<Customer> customers;
+
+        //Constructor
+        public Day()
 		{
-		}
-	}
+         
+            
+        }
+
+        //Methods CAN DO
+    }
 }
 
