@@ -5,16 +5,15 @@ namespace LemonadeStand
 	{
 		//Member Variables (HAS A)
 		private Player player;
-		private List<Day> days;
-		private int currentDay;
+		private List<Day> days;		
+		
 
         //Constructor
         public Game()
 		{
-					
-
 			
-		}
+
+        }
 
 		//Methods CAN DO
 		public void DisplayWelcome()
@@ -23,10 +22,20 @@ namespace LemonadeStand
 			
 		}
 
+		public void DisplayDay()
+		{
+			Console.WriteLine($"{days} begins!");
+
+        }
+
 		public void RunGame()
 		{
 			DisplayWelcome();
-		}
+			DisplayDay();
+            
+
+
+        }
     }
 }
 
