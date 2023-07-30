@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public class Player 
+    public class Player : Inventory
     {
         //HAS A
         public string name;
         public Wallet wallet;
         public Inventory inventory;
         public Recipe recipe;
+        
 
         //CONSTRUCTOR
         public Player(string name)
@@ -33,6 +34,10 @@ namespace LemonadeStand
 
         public Inventory GetInventory()
         {
+            //Console.WriteLine($"You have {} lemons");
+            //Console.WriteLine($"You have {numberOfSugarCubes} sugar cubes");
+            //Console.WriteLine($"You have {numberOfIceCubes} ice cubes");
+            //Console.WriteLine($"You have {numberOfCups} cups");
             return inventory;
         }
 
@@ -40,6 +45,8 @@ namespace LemonadeStand
         {
             return recipe;
         }
+
+        
 
     }
 }

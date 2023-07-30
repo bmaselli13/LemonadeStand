@@ -13,16 +13,20 @@ namespace LemonadeStand
 	{
         //HAS A
 
-        private Player Player;
-        private Wallet Wallet;
+        private Player player;
+        private Wallet wallet;
+        private Weather weather;
         private int currentDay; 
         private List<Day> days;
+        private Inventory inventory;
                 
         //CONSTRUCTOR
         public Game()
         {
-            this.Wallet = new Wallet();
-                      
+            this.weather = new Weather("Sunny", 75, 8);
+            this.wallet = new Wallet();
+            this.player = new Player("Brian");
+        
         }
 
         public void InitializeDays()
@@ -69,21 +73,17 @@ namespace LemonadeStand
             //Start the first day
             InitializeDays();
 
-            //Display player’s inventory
-            Wallet.CurrentWallet();
+            //Display player’s wallet amount
+            wallet.CurrentWallet();
+
+            //Show the inventory
+            //Display amount of lemons
+            //Display amount of sugar cubes
+            //Display amount of ice cubes
+            //Display amount of cups
 
             //Player.GetInventory();
 
-            //Display amount in wallet(money)
-            //Wallet.CurrentWallet();
-
-            //Display amount of lemons
-
-            //Display amount of sugar cubes
-
-            //Display amount of ice cubes
-
-            //Display amount of cups
 
             //Allow user to go to store to purchase ingredients
 
@@ -102,7 +102,7 @@ namespace LemonadeStand
             //If yes, add options to change item amounts
 
             //Display the weather forecast
-            //ShowWeatherForecast();
+            weather.GenerateRandomWeather();
 
             //Will be a random value
 
@@ -113,7 +113,7 @@ namespace LemonadeStand
             //Ask the price per cup
 
             //Display the details about the weather for the day including temp and whether sunny or cloudy
-            //ShowWeatherActual();
+            
 
             //Start day until sold out
 

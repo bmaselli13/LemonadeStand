@@ -66,10 +66,7 @@ namespace LemonadeStand
             }
         }
 
-        public void ShowInventory()
-        {
-
-        }
+     
 
 
     }

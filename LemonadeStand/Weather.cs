@@ -11,11 +11,11 @@ namespace LemonadeStand
         public int CupsPerPitcher;
 
         //CONSTRUCTOR
-        public Weather(string predictedForecast, int temperature, List<string> weatherConditions, int cupsPerPitcher)
+        public Weather(string predictedForecast, int temperature, int cupsPerPitcher)
         {
             PredictedForecast = predictedForecast;
             Temperature = temperature;
-            WeatherConditions = weatherConditions;
+            //WeatherConditions = weatherConditions;
             CupsPerPitcher = cupsPerPitcher;
         }
 
@@ -29,8 +29,12 @@ namespace LemonadeStand
             List<string> weatherConditions = new List<string> { "Clear skies", "Sunny", "Warm", "Cloudy", "Cold", "Rainy" };
             int cupsPerPitcher = 8; // Assuming 8 cups per pitcher.
 
-            return new Weather(predictedForecast, temperature, weatherConditions, cupsPerPitcher);
+            
+            Console.WriteLine($"\nToday's forecast: {predictedForecast}");
+            return new Weather(predictedForecast, temperature, cupsPerPitcher);
         }
+
+        
     }
 }
 
