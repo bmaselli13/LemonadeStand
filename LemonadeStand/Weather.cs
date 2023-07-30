@@ -3,55 +3,34 @@ namespace LemonadeStand
 {
 	public class Weather
 	{
-        //Member Variables (HAS A)
-        public string condition;
-        public int temperature;
-        public string predictedForecast;
-        private List<string> weatherConditions;
+        //HAS A
+        public string PredictedForecast;
+        public string Condition;
+        public int Temperature;
+        private List<string> WeatherConditions;
+        public int CupsPerPitcher;
 
-
-        // Constructor
-        public Weather(string condition, double temperature, string forecast)
+        //CONSTRUCTOR
+        public Weather(string predictedForecast, int temperature, List<string> weatherConditions, int cupsPerPitcher)
         {
-            condition = condition;
-            temperature = temperature;
-            predictedForecast = forecast;
-            weatherConditions = new List<string>();
+            PredictedForecast = predictedForecast;
+            Temperature = temperature;
+            WeatherConditions = weatherConditions;
+            CupsPerPitcher = cupsPerPitcher;
         }
 
         //CAN DO
 
-        // Method to add weather condition to the list
-        public void AddWeatherCondition(string condition)
+        public Weather GenerateRandomWeather()
         {
-            weatherConditions.Add(condition);
-        }
-
-        // Method to get a random weather condition from the list
-        public string GetRandomWeatherCondition()
-        {           
             Random random = new Random();
-            int index = random.Next(0, weatherConditions.Count);
-            return weatherConditions[index];
+            string predictedForecast = "Sunny";
+            int temperature = random.Next(70, 100); // Random temperature between 70 and 100 degrees Fahrenheit.
+            List<string> weatherConditions = new List<string> { "Clear skies", "Sunny", "Warm", "Cloudy", "Cold", "Rainy" };
+            int cupsPerPitcher = 8; // Assuming 8 cups per pitcher.
+
+            return new Weather(predictedForecast, temperature, weatherConditions, cupsPerPitcher);
         }
-
-        public void GetDayWeather()
-        {
-            // Creating a Weather instance for today
-            Weather todayWeather = new Weather("Sunny", 25.5, "Clear skies");
-
-            // Adding more weather conditions to the list
-            todayWeather.AddWeatherCondition("Cloudy");
-            todayWeather.AddWeatherCondition("Rainy");
-            todayWeather.AddWeatherCondition("Snowy");
-
-            // Randomly selecting and printing weather condition for today
-            Console.WriteLine("Today's Weather: ");
-            Console.WriteLine("Weather: " + todayWeather.GetRandomWeatherCondition());
-            Console.WriteLine("Temperature: " + todayWeather.temperature + "°C");
-            Console.WriteLine("Predicted Forecast: " + todayWeather.predictedForecast);
-        }
-
     }
 }
 

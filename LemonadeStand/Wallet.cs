@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Wallet
+    public class Wallet
     {
         // member variables (HAS A)
         private double money;
@@ -33,6 +33,11 @@ namespace LemonadeStand
         public void AcceptMoney(double income)
         {
             money += income;
+        }
+
+        public void CurrentWallet()
+        {
+            Console.WriteLine($"\nYou have ${money}");
         }
     }
 }

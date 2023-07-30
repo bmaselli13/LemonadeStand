@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Inventory
+    public class Inventory
     {
         // member variables (HAS A)
         public List<Lemon> lemons;
-        public List<IceCube> iceCubes;                
-        public List<Cup> cups;
         public List<SugarCube> sugarCubes;
+        public List<IceCube> iceCubes;
+        public List<Cup> cups;
 
         // constructor (SPAWNER)
         public Inventory()
@@ -28,6 +28,8 @@ namespace LemonadeStand
         }
 
         // member methods (CAN DO)
+        
+
         public void AddLemonsToInventory(int numberOfLemons)
         {
             for(int i = 0; i < numberOfLemons; i++)
@@ -62,6 +64,11 @@ namespace LemonadeStand
                 Cup cup = new Cup();
                 cups.Add(cup);
             }
+        }
+
+        public void ShowInventory()
+        {
+
         }
 
 

@@ -6,24 +6,40 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Player
+    public class Player 
     {
-        // member variables (HAS A)
+        //HAS A
         public string name;
-        public Inventory inventory;
         public Wallet wallet;
+        public Inventory inventory;
         public Recipe recipe;
-        
-        // constructor (SPAWNER)
-        public Player()
+
+        //CONSTRUCTOR
+        public Player(string name)
         {
-            inventory = new Inventory();
+            this.name = name;
             wallet = new Wallet();
+            inventory = new Inventory();
             recipe = new Recipe();
-            
         }
 
-        // member methods (CAN DO)
+        //CAN DO
+
+        
+        public Wallet GetWallet()
+        {
+            return wallet;
+        }
+
+        public Inventory GetInventory()
+        {
+            return inventory;
+        }
+
+        public Recipe GetRecipe()
+        {
+            return recipe;
+        }
 
     }
 }

@@ -1,40 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Security.Cryptography;
+
 namespace LemonadeStand
 {
-    public class Day : Weather
-    {
-        //Member Variables (HAS A)
-        public Weather weather;
+	public class Day
+	{
+        public int DayNumber;
+        public Weather Weather;
+        public Wallet PlayerWallet;
         public List<Customer> customers;
-        List<string> days = new List<string>
 
-            {
-                "Day 1",
-                "Day 2",
-                "Day 3",
-                "Day 4",
-                "Day 5",
-                "Day 6",
-                "Day 7"
-            };
-
-
-        //Constructor
-        //public Day(Weather weather, Customer customer)
-        //{
-        //    this.weather = new Weather(condition, temperature, predictedForecast);
+        
+        public Day(int DayNumber, Weather weather, Wallet playerWallet)
+        {
+            this.DayNumber = DayNumber;
+            this.Weather = weather;
+            Weather Weather = weather;
+            this.PlayerWallet = playerWallet;
+            
             
         }
 
-        //Methods CAN DO
-
-        public void DisplayDay()
+        public int GetDayNumber()
         {
-            foreach (string day in days)
-            {
-                Console.WriteLine(day);
-            }
+            return DayNumber;
+        }
+
+        public void ShowCupsPerPitcher()
+        {
+            Console.WriteLine($"Each pitcher pours {Weather.CupsPerPitcher} cups");
+        }
+
+        public int AskNumPitchersToMake()
+        {
+            Console.Write("How many pitchers of lemonade would you like to make? (Enter 0 to cancel): ");
+            int numPitchers = int.Parse(Console.ReadLine());
+            return numPitchers;
+        }
+
+        public double AskPricePerCup()
+        {
+            Console.Write("What price would you like to charge per cup for the day? ");
+            double pricePerCup = double.Parse(Console.ReadLine());
+            return pricePerCup;
+        }
+
+        public void SimulateDay()
+        {
+            // Simulate the day by showing messages for customer interactions and updating profits.
+        }
+
+        public void EndDay()
+        {
+            // Calculate and display profits for the day and update the player's wallet.
         }
     }
 }
