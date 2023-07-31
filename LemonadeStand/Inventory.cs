@@ -8,66 +8,59 @@ namespace LemonadeStand
 {
     public class Inventory
     {
-        // member variables (HAS A)
-        public List<Lemon> lemons;
-        public List<SugarCube> sugarCubes;
-        public List<IceCube> iceCubes;
         public List<Cup> cups;
+        public List<Lemon> lemons;
+        public List<Sugar> cupsOfSugar;
+        public List<Ice> iceCubes;
 
-        // constructor (SPAWNER)
         public Inventory()
         {
-            lemons = new List<Lemon>();
-            sugarCubes = new List<SugarCube>();
-            iceCubes = new List<IceCube>();
             cups = new List<Cup>();
-            AddLemonsToInventory(20);
-            AddSugarCubesToInventory(20);
-            AddIceCubesToInventory(100);
-            AddCupsToInventory(30);
+            lemons = new List<Lemon>();
+            cupsOfSugar = new List<Sugar>();
+            iceCubes = new List<Ice>();
         }
 
-        // member methods (CAN DO)
-        
-
-        public void AddLemonsToInventory(int numberOfLemons)
+        // helper methods to check inventory
+        public bool CheckCups(List<Cup> cup)
         {
-            for(int i = 0; i < numberOfLemons; i++)
+            if (cups.Count >= 1)
             {
-                Lemon lemon = new Lemon();
-                lemons.Add(lemon);
+                return true;
             }
+
+            return false;
         }
 
-        public void AddSugarCubesToInventory(int numberOfSugarCubes)
+        public bool CheckLemons(List<Lemon> lemons, Recipe recipe)
         {
-            for(int i = 0; i < numberOfSugarCubes; i++)
+            if (lemons.Count >= recipe.lemonsPerPitch)
             {
-                SugarCube sugarCube = new SugarCube();
-                sugarCubes.Add(sugarCube);
+                return true;
             }
+
+            return false;
         }
 
-        public void AddIceCubesToInventory(int numberOfIceCubes)
+        public bool CheckSugar(List<Sugar> sugar, Recipe recipe)
         {
-            for(int i = 0; i < numberOfIceCubes; i++)
+            if (sugar.Count >= recipe.sugarPerPitcher)
             {
-                IceCube iceCube = new IceCube();
-                iceCubes.Add(iceCube);
+                return true;
             }
+
+            return false;
         }
 
-        public void AddCupsToInventory(int numberOfCups)
+        public bool CheckIce(List<Ice> ice, Recipe recipe)
         {
-            for(int i = 0; i < numberOfCups; i++)
+            if (ice.Count >= recipe.icePerCup)
             {
-                Cup cup = new Cup();
-                cups.Add(cup);
+                return true;
             }
+
+            return false;
         }
-
-     
-
 
     }
 }

@@ -1,40 +1,35 @@
 ﻿using System;
 namespace LemonadeStand
 {
-	public class Weather
-	{
-        //HAS A
-        public string PredictedForecast;
-        public string Condition;
-        public int Temperature;
-        private List<string> WeatherConditions;
-        public int CupsPerPitcher;
+    public class Weather
+    {
+        private string[] forecastArray;
+        public int temperature;
+        public string forecast;
+        Random randomNumber;
 
-        //CONSTRUCTOR
-        public Weather(string predictedForecast, int temperature, int cupsPerPitcher)
+        public Weather(Random randomNumber)
         {
-            PredictedForecast = predictedForecast;
-            Temperature = temperature;
-            //WeatherConditions = weatherConditions;
-            CupsPerPitcher = cupsPerPitcher;
+            this.randomNumber = randomNumber;
+            forecastArray = new string[] { "sunny", "cloudy", "rainy", "hazy" };
+            SetForecast();
+            SetTemperature();
         }
 
-        //CAN DO
-
-        public Weather GenerateRandomWeather()
+        public void SetForecast()
         {
-            Random random = new Random();
-            string predictedForecast = "Sunny";
-            int temperature = random.Next(70, 100); // Random temperature between 70 and 100 degrees Fahrenheit.
-            List<string> weatherConditions = new List<string> { "Clear skies", "Sunny", "Warm", "Cloudy", "Cold", "Rainy" };
-            int cupsPerPitcher = 8; // Assuming 8 cups per pitcher.
-
-            
-            Console.WriteLine($"\nToday's forecast: {predictedForecast}");
-            return new Weather(predictedForecast, temperature, cupsPerPitcher);
+            // Generate a random forecast
+            int forecastIndex = randomNumber.Next(0, forecastArray.Length);
+            forecast = forecastArray[forecastIndex];
         }
 
-        
+        public void SetTemperature()
+        {
+            // Generate random temperatue between 48 and 103 degrees
+            temperature = randomNumber.Next(48, 103);
+        }
+
+
     }
 }
 

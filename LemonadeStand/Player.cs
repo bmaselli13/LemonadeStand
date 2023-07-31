@@ -6,47 +6,24 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public class Player : Inventory
+    public class Player
     {
-        //HAS A
-        public string name;
-        public Wallet wallet;
+        public double cash;
+        public double profit;
+        public double cost;
         public Inventory inventory;
-        public Recipe recipe;
-        
-
-        //CONSTRUCTOR
-        public Player(string name)
+        public UserInterface ui = new UserInterface();
+        public Player()
         {
-            this.name = name;
-            wallet = new Wallet();
             inventory = new Inventory();
-            recipe = new Recipe();
+            cash = 20.00;
+            profit = cash - cost;
+            cost = 0.0;
         }
 
-        //CAN DO
-
-        
-        public Wallet GetWallet()
+        public double CalculateProfit()
         {
-            return wallet;
+            return cash - cost;
         }
-
-        public Inventory GetInventory()
-        {
-            //Console.WriteLine($"You have {} lemons");
-            //Console.WriteLine($"You have {numberOfSugarCubes} sugar cubes");
-            //Console.WriteLine($"You have {numberOfIceCubes} ice cubes");
-            //Console.WriteLine($"You have {numberOfCups} cups");
-            return inventory;
-        }
-
-        public Recipe GetRecipe()
-        {
-            return recipe;
-        }
-
-        
-
     }
 }

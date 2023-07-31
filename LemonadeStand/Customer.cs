@@ -4,24 +4,89 @@ namespace LemonadeStand
 	public class Customer
 	{
 
-        public bool BuysLemonade;
-
-        public Customer()
+        public bool thirsty;
+        public double acceptablePrice;
+        public Random random;
+        public bool willBuy;
+        public Customer(Weather weather, Random random)
         {
-            BuysLemonade = false;
+            this.random = random;            
+            CheckThirst(weather);
         }
 
-        public void DecideToBuy(int temperature, string weatherCondition, double pricePerCup)
+                
+        public void CheckThirst(Weather weather)
         {
-            
-            // If the temperature is above 75 degrees, and it's sunny, and the price per cup is reasonable, the customer buys lemonade.
-
-            // For demonstration purposes, let's assume the customer buys lemonade if the temperature is above 75 degrees and the price is $0.25 per cup.
-            if (temperature > 75 && pricePerCup <= 0.25)
+            if (weather.temperature > 85)
             {
-                BuysLemonade = true;
+                if (random.Next(88, 101) > 90)
+                {
+                    thirsty = true;
+                }
+                else
+                {
+                    thirsty = false;
+                }
+            }
+            else if (weather.temperature >= 54 && weather.temperature <= 84)
+            {
+                if (random.Next(75, 101) > 90)
+                {
+                    thirsty = true;
+                }
+                else
+                {
+                    thirsty = false;
+                }
+            }
+            else
+            {
+                if (random.Next(50, 101) > 90)
+                {
+                    thirsty = true;
+                }
+                else
+                {
+                    thirsty = false;
+                }
             }
         }
+
+        // method determines weather a customer will buy or not
+        public void WillBuy(Recipe recipe)
+        {
+            if (recipe.pricePerCup < acceptablePrice && thirsty == false)
+            {
+                if (random.Next(20, 101) > 75)
+                {
+                    willBuy = true;
+                }
+                else
+                {
+                    willBuy = false;
+                }
+            }
+            else if (thirsty == true && recipe.pricePerCup > acceptablePrice)
+            {
+                if (random.Next(40, 101) > 75)
+                {
+                    willBuy = true;
+                }
+                else
+                {
+                    willBuy = false;
+                }
+            }
+            else if (thirsty == true && recipe.pricePerCup < acceptablePrice)
+            {
+                willBuy = true;
+            }
+            else if (thirsty == false && recipe.pricePerCup > acceptablePrice)
+            {
+                willBuy = false;
+            }
+        }
+
     }
 }
 

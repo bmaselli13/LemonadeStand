@@ -1,82 +1,238 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Store
+    public class Store
     {
-        // member variables (HAS A)
-        private double pricePerLemon;
-        private double pricePerSugarCube;
-        private double pricePerIceCube;
-        private double pricePerCup;
+        public UserInterface ui;
+        public List<Ingredient> purchasedIngredients;
 
-        // constructor (SPAWNER)
         public Store()
         {
-            pricePerLemon = .5;
-            pricePerSugarCube = .1;
-            pricePerIceCube = .01;
-            pricePerCup = .25;
+            ui = new UserInterface();
+            purchasedIngredients = new List<Ingredient>();
         }
 
-        // member methods (CAN DO)
-        public void SellLemons(Player player)
+        
+        public void BuyIngredient(Player player, string ingredient)
         {
-            int lemonsToPurchase = UserInterface.GetNumberOfItems("lemons");
-            double transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
-            if(player.wallet.Money >= transactionAmount)
+            if (ingredient == "cups")
             {
-                player.wallet.PayMoneyForItems(transactionAmount);
-                player.inventory.AddLemonsToInventory(lemonsToPurchase);
+                PurchaseCups(player, ingredient);
+            }
+            else if (ingredient == "lemons")
+            {
+                PurchaseLemons(player, ingredient);
+            }
+            else if (ingredient == "sugar")
+            {
+                PurchaseSugar(player, ingredient);
+            }
+            else if (ingredient == "ice")
+            {
+                PurchaseIce(player, ingredient);
+            }
+            else
+            {
+                // call get recipe method
+                ui.RecipeWelcomePage();
             }
         }
 
-        public void SellSugarCubes(Player player)
+        // Method to purchase cups 
+        public void PurchaseCups(Player player, string ingredient)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItems("sugar");
-            double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
-            if(player.wallet.Money >= transactionAmount)
+            int quantity;
+            double total;
+
+            // display buying options
+            // let user choose quantity
+            quantity = ui.AskForCups();
+
+            // sets price
+            switch (quantity)
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddSugarCubesToInventory(sugarToPurchase);
+                case 25:
+                    total = .50;
+                    break;
+                case 50:
+                    total = 1.00;
+                    break;
+                case 100:
+                    total = 3.00;
+                    break;
+                default:
+                    total = 0.0;
+                    break;
             }
-        }
 
-        public void SellIceCubes(Player player)
-        {
-            int iceCubesToPurchase = UserInterface.GetNumberOfItems("ice cubes");
-            double transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
-            if(player.wallet.Money >= transactionAmount)
+            // subtract price from player.cash
+            player.cash = player.cash - total;
+
+            // add price to player.cost
+            player.cost = player.cost + total;
+
+            // check if player has enough cash
+            if (player.cash < 0)
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddIceCubesToInventory(iceCubesToPurchase);
+                Console.WriteLine("You ran out of money!");
+                
             }
-        }
 
-        public void SellCups(Player player)
-        {
-            int cupsToPurchase = UserInterface.GetNumberOfItems("cups");
-            double transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
-            if(player.wallet.Money >= transactionAmount)
+            // loop through creating as many objects as the user asked for
+            for (int i = 0; i < quantity; i++)
             {
-                PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddCupsToInventory(cupsToPurchase);
+                player.inventory.cups.Add(new Cup());
             }
+
+            ui.BackToStoreMenu();
+            
         }
 
-        private double CalculateTransactionAmount(int itemCount, double itemPricePerUnit)
+        // Method to purchase lemons
+        public void PurchaseLemons(Player player, string ingredient)
         {
-            double transactionAmount = itemCount * itemPricePerUnit;
-            return transactionAmount;
+            int quantity;
+            double total;
+
+            // display buying options
+            // let user choose quantity
+            quantity = ui.AskForLemons();
+
+            // sets price
+            switch (quantity)
+            {
+                case 10:
+                    total = .50;
+                    break;
+                case 30:
+                    total = 2.00;
+                    break;
+                case 75:
+                    total = 4.00;
+                    break;
+                default:
+                    total = 0.0;
+                    break;
+            }
+
+            // subtract price from player.cash
+            player.cash = player.cash - total;
+
+            // check if player has enough cash
+            if (player.cash < 0)
+            {
+                Console.WriteLine("You ran out of money!");
+                
+            }
+
+            // loop through creating as many objects as the user asked for
+            for (int i = 0; i < quantity; i++)
+            {
+                player.inventory.lemons.Add(new Lemon());
+            }
+
+            ui.BackToStoreMenu();
+            
         }
 
-        private void PerformTransaction(Wallet wallet, double transactionAmount)
+        // Method to purchase sugar
+        public void PurchaseSugar(Player player, string ingredient)
         {
-            wallet.PayMoneyForItems(transactionAmount);
+            int quantity;
+            double total;
+
+            // display buying options
+            // let user choose quantity
+            quantity = ui.AskForSugar();
+
+            // sets price
+            switch (quantity)
+            {
+                case 8:
+                    total = .50;
+                    break;
+                case 20:
+                    total = 1.00;
+                    break;
+                case 48:
+                    total = 3.00;
+                    break;
+                default:
+                    total = 0.0;
+                    break;
+            }
+
+            // subtract price from player.cash
+            player.cash = player.cash - total;
+
+            // check if player has enough cash
+            if (player.cash < 0)
+            {
+                Console.WriteLine("You ran out of money!");
+                
+            }
+
+            // loop through creating as many objects as the user asked for
+            for (int i = 0; i < quantity; i++)
+            {
+                player.inventory.cupsOfSugar.Add(new Sugar());
+            }
+
+            ui.BackToStoreMenu();
+            
+        }
+
+        // Method to purchase ice
+        public void PurchaseIce(Player player, string ingredient)
+        {
+            int quantity;
+            double total;
+
+            // display buying options
+            // let user choose quantity
+            quantity = ui.AskForIce();
+
+            // sets price
+            switch (quantity)
+            {
+                case 100:
+                    total = .75;
+                    break;
+                case 250:
+                    total = 2.00;
+                    break;
+                case 500:
+                    total = 3.00;
+                    break;
+                default:
+                    total = 0.0;
+                    break;
+            }
+
+            // subtract price from player.cash
+            player.cash = player.cash - total;
+
+            // check if player has enough cash
+            if (player.cash < 0)
+            {
+                Console.WriteLine("You ran out of money!");
+                
+            }
+
+            // loop through creating as many objects as the user asked for
+            for (int i = 0; i < quantity; i++)
+            {
+                player.inventory.iceCubes.Add(new Ice());
+            }
+
+            ui.BackToStoreMenu();
+            
         }
     }
 }

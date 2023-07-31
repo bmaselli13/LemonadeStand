@@ -1,58 +1,92 @@
 ﻿using System;
-using System.Security.Cryptography;
-
 namespace LemonadeStand
 {
 	public class Day
 	{
-        public int DayNumber;
-        public Weather Weather;
-        public Wallet PlayerWallet;
+        public Weather weather;
+        public Random randomNumber;
+        public Recipe recipe;
         public List<Customer> customers;
+        public UserInterface ui;
 
-        
-        public Day(int DayNumber, Weather weather, Wallet playerWallet)
+        public Day(Random randomNumber)
         {
-            this.DayNumber = DayNumber;
-            this.Weather = weather;
-            Weather Weather = weather;
-            this.PlayerWallet = playerWallet;
-            
-            
+            this.randomNumber = randomNumber;
+            weather = new Weather(randomNumber);
+            recipe = new Recipe();
+            customers = new List<Customer>();
+            ui = new UserInterface();
         }
 
-        public int GetDayNumber()
+        public void SellLemonade(Player player, Recipe recipe)
         {
-            return DayNumber;
+            int sold;
+            int pitcher;
+            int pitcherEmpty;
+
+            sold = 0;
+            pitcher = 0;
+            pitcherEmpty = 0;
+
+            GenerateCustomers();
+
+            for (int i = 0; i < customers.Count; i++)
+            {
+                customers[i].WillBuy(recipe);
+            }
+
+            // check if the customer will buy lemonade
+            for (int i = 0; i < customers.Count; i++)
+            {                
+
+                if (customers[i].willBuy == true)
+                {
+                    // if pitcher is equal to 0 check:
+                    if (pitcher == pitcherEmpty)
+                    {
+                        if (player.inventory.CheckLemons(player.inventory.lemons, recipe) &&
+                           player.inventory.CheckSugar(player.inventory.cupsOfSugar, recipe) &&
+                           player.inventory.CheckCups(player.inventory.cups) &&
+                           player.inventory.CheckIce(player.inventory.iceCubes, recipe)
+                          ) ;
+                        else
+                        {
+                            ui.ShowSoldOutMessage();
+                            break;
+                        }
+                    }
+
+                    // if pitcher is not equal to zero
+                    // check cups
+                    // check ice
+                    if (player.inventory.CheckCups(player.inventory.cups) && player.inventory.CheckIce(player.inventory.iceCubes, recipe))
+                    {
+                        // if both are true, remove both from inventory
+                        player.inventory.cups.RemoveRange(0, 1);
+                        player.inventory.iceCubes.RemoveRange(0, recipe.icePerCup);
+
+                        player.cash += recipe.pricePerCup;
+                        player.profit += recipe.pricePerCup;
+                        sold++;
+                        pitcher--;
+                    }
+                    else
+                    {
+                        ui.ShowSoldOutMessage();
+                        break;
+                    }
+                }
+            }
+            ui.DisplaySoldCups(sold);
         }
 
-        public void ShowCupsPerPitcher()
+        public void GenerateCustomers()
         {
-            Console.WriteLine($"Each pitcher pours {Weather.CupsPerPitcher} cups");
-        }
-
-        public int AskNumPitchersToMake()
-        {
-            Console.Write("How many pitchers of lemonade would you like to make? (Enter 0 to cancel): ");
-            int numPitchers = int.Parse(Console.ReadLine());
-            return numPitchers;
-        }
-
-        public double AskPricePerCup()
-        {
-            Console.Write("What price would you like to charge per cup for the day? ");
-            double pricePerCup = double.Parse(Console.ReadLine());
-            return pricePerCup;
-        }
-
-        public void SimulateDay()
-        {
-            // Simulate the day by showing messages for customer interactions and updating profits.
-        }
-
-        public void EndDay()
-        {
-            // Calculate and display profits for the day and update the player's wallet.
+            for (int i = 0; i < 100; i++)
+            {
+                Customer customer = new Customer(weather, randomNumber);
+                customers.Add(customer);
+            }
         }
     }
 }

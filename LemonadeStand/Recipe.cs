@@ -8,38 +8,22 @@ namespace LemonadeStand
 {
     public class Recipe
     {
-        // member variables (HAS A)
-        public int numberOfLemons;
-        public int numberOfSugarCubes;
-        public int numberOfIceCubes;
-        public double price;
 
-
-        // constructor (SPAWNER)
+        public int lemonsPerPitch;
+        public int icePerCup;
+        public int sugarPerPitcher;
+        public double pricePerCup;
+        public UserInterface ui = new UserInterface();
         public Recipe()
         {
-            numberOfLemons = 2;
-            numberOfSugarCubes = 4;
-            numberOfIceCubes = 10;
-            price = 1;
-        }
 
-        //Member Methods (CAN DO)
-        public void DisplayRecipe()
+        }
+        public void SetQuantityOfIngredients(Day day)
         {
-            Console.WriteLine($"Your recipe currently consists of:\n{numberOfLemons} lemons per pitcher\n{numberOfSugarCubes} sugar cubes per pitcher\n{numberOfIceCubes} ice cubes per pitcher");
+            lemonsPerPitch = ui.LemonsPerPitcher();
+            icePerCup = ui.IcePerCup();
+            sugarPerPitcher = ui.SugarPerPitcher();
+            pricePerCup = ui.PricePerCup();
         }
-
-        public void ChangeRecipe()
-        {
-            Console.Write("Do you want to change the recipe? (Y/N): ");
-            string choice = Console.ReadLine();
-
-            if (choice.Equals("Y", StringComparison.OrdinalIgnoreCase))
-            {
-                // Ask the player for the new recipe details and update the Recipe class.
-            }
-        }
-
     }
 }
