@@ -11,11 +11,11 @@ namespace LemonadeStand
         public Customer(Weather weather, Random random)
         {
             this.random = random;            
-            CheckThirst(weather);
+            Thirst(weather);
         }
 
                 
-        public void CheckThirst(Weather weather)
+        public void Thirst(Weather weather)
         {
             if (weather.temperature > 85)
             {
